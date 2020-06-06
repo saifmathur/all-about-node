@@ -1,0 +1,20 @@
+<html>
+    <body>
+        
+        <h1>WELCOME TO THE PROFILE OF <%= person %></h1>
+        
+        <p>details about <%= person %> are as follows</p>
+        <table>
+            <tr><strong>Age: </strong><%= data.age %></tr><br><br>
+            <tr><strong>Job: </strong><%= data.job %></tr>
+            <tr><%- include('partials/nav'); %></tr>
+            <h2>His Hobbies are: </h2>
+            <ul>
+                <% data.hobby.forEach(function(item){ %>
+                    <li> <%= item %></li>
+                <% }); %>
+            </ul>
+            
+        </table>
+        </body>
+    </html>

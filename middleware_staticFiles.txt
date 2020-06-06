@@ -1,0 +1,23 @@
+/*
+MIDDLEWARE and static files
+
+middlware:
+a piece of code which runs between the request and response, this code could be anything
+example, if you write your css code externally i.e in a different css file, it will not be executed and will throw a 404 error 
+in inspect tab as the server is 'requesting' the css file.
+Now we can include this css by using MIDDLEWARE by typing the following line after setting the view engine
+
+
+app.use('/cssFolder', function(req,res,next){
+    console.log(req.url);
+    next(); //this is just to tell the code to move on to the next middleware or the next piece of code, without this the code will break
+}) 
+
+since the css is a static file, express module has an inbuilt middleware 'express.static()'
+use this line instead of function
+
+app.use('/cssFolder', express.static('cssFolder'));
+
+
+
+*/

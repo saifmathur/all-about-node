@@ -1,0 +1,14 @@
+/*
+npm init
+this command keeps a track of your dependencies, either by package.json
+or use the above command in the terminal, in the project directory
+
+this will create a package.json file and that will keep a track
+
+
+npm install express -save, use this '-save' to save this entry in the package.json file
+
+now, if we give our code to some other developer they wont have to install all
+packages manually, they can just use the command
+'npm install' and it will search for all dependencies needed for that project
+*/

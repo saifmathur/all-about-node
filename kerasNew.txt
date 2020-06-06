@@ -1,0 +1,45 @@
+Are you a machine learning engineer looking to use Keras to ship deep-learning powered features in real products? This guide will serve as your first introduction to core Keras API concepts.
+
+In this guide, you will learn about:
+
+How to prepare you data before training a model (by turning it into either NumPy arrays or tf.data.Dataset objects).
+How to do data preprocessing, for instance feature normalization or vocabulary indexing.
+How to build a model that turns your data into useful predictions, using the Keras Functional API.
+How to train your model with the built-in Keras fit() method, while being mindful of checkpointing, metrics monitoring, and fault tolerance.
+How to evaluate your model on a test data and how to use it for inference on new data.
+How to customize what fit() does, for instance to build a GAN.
+How to speed up training by leveraging multiple GPUs.
+How to refine your model through hyperparameter tuning.
+At the end of this guide, you will get pointers to end-to-end examples to solidify these concepts:
+
+Image classification
+Text classification
+Credit card fraud detection
+Data loading & preprocessing
+Neural networks don't process raw data, like text files, encoded JPEG image files, or CSV files. They process vectorized & standardized representations.
+
+Text files needs to be read into string tensors, then split into words. Finally, the words need to be indexed & turned into integer tensors.
+Images need to be read and decoded into integer tensors, then converted to floating point and normalized to small values (usually between 0 and 1).
+CSV data needs to be parsed, with numerical features converted to floating point tensors and categorical features indexed and converted to integer tensors. Then each feature typically needs to be normalized to zero-mean and unit-variance.
+Etc.
+Let's start with data loading.
+
+Data loading
+Keras models accept three types of inputs:
+
+NumPy arrays, just like Scikit-Learn and many other Python-based libraries. This is a good option if your data fits in memory.
+TensorFlow Dataset objects. This is a high-performance option that is more suitable for datasets that do not fit in memory and that are streamed from disk or from a distributed filesystem.
+Python generators that yield batches of data (such as custom subclasses of the keras.utils.Sequence class).
+Before you start training a model, you will need to make your data available as one of these formats. If you have a large dataset and you are training on GPU(s), consider using Dataset objects, since they will take care of performance-critical details, such as:
+
+Asynchronously preprocessing your data on CPU while your GPU is busy, and bufferring it into a queue.
+Prefetching data on GPU memory so it's immediately available when the GPU has finished processing the previous batch, so you can reach full GPU utilization.
+Keras features a range of utilities to help you turn raw data on disk into a Dataset:
+
+tf.keras.preprocessing.image_dataset_from_directory turns image files sorted into class-specific folders into a labeled dataset of image tensors.
+tf.keras.preprocessing.text_dataset_from_directory does the same for text files.
+In addition, the TensorFlow tf.data includes other similar utilities, such as tf.data.experimental.make_csv_dataset to load structured data from CSV files.
+
+Example: obtaining a labeled dataset from image files on disk
+
+Supposed you have image files sorted by class in different folders, like this:
